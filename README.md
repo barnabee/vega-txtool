@@ -12,10 +12,11 @@ A simple tool to check Vega transacton JSON.
 
 - Encodes the input data in the URL hash for ease of sharing.
 
+- Autocompletes and provides documentation tooltips for most commands.
 
 ## Known limitations
 
-- Serialising the encoded data to JSON doesn't currently produce the format expected by the wallet etc. This means that the "Copy processed to input" buttton is less useful than it otherwise might be and the tool couldn't currently be used to submit transactions.
+- Serialising the encoded data to JSON doesn't always produce the format expected by the wallet etc. This now only occurs in a few cases like arguments for EVM contracts in oracle specs, and base64 encoded fields.
 
 - Validation errors found by the protobuf encoder don't provider a location/field name and therefore lack much in the way of useful context.
 
@@ -26,7 +27,7 @@ A simple tool to check Vega transacton JSON.
 
 - Fix JSON encoding (hopefully via upstream library enhancement).
 
-- ALternative and less unwieldy content-addressable sharing system.
+- Alternative and less unwieldy content-addressable sharing system.
 
 - Call tx check endpoint on data node to provide more detailed and helpful validation.
 
