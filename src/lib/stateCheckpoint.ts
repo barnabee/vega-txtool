@@ -45,7 +45,7 @@ window.onload = () => {
 }
 
 window.onhashchange = () => {
-  stateValue = location.hash.slice(1) == '' ? 'null' : atob(location.hash.slice(1))
+  stateValue = location.hash.slice(1) == '' ? '' : atob(location.hash.slice(1))
   markCheckpointClean()
   resetCheckpointTimeout()
   try {

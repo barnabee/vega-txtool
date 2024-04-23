@@ -8,7 +8,7 @@
     setState, 
     onStateChanged, 
     resetCheckpointTimeout, 
-    saveCheckpointIfDirty } from './lib/stateCheckpoint.ts'
+    saveCheckpointIfDirty } from './lib/stateCheckpoint'
 
   import EditorToolbar from './EditorToolbar.svelte'
   import Editor from './Editor.svelte'
@@ -29,7 +29,7 @@
   let left: any, right: any, delta: Delta | null, otherError: string | null
 
   // Called when URL hash changes
-  onStateChanged(s => inputJson = s)
+  onStateChanged(s => inputJson = s || '')
 
    // Get the roundtrip result and diff with input (has to be async because of the diff library)
   async function processInput(parsedObj: any) {
@@ -51,7 +51,7 @@
   $: [command, jsonError] = parseOr(inputJson, null)  // parse JSON and check for basic syntax errors
   $: tx = { nonce: 0n, blockHeight: 0n, command }  // place the parsed JSON in a Vega InputData message
   $: processInput(tx)
-  $: outputText = outputFormatters[outputFormat].format(left)
+  $: outputText = left !== null ? outputFormatters[outputFormat].format(left) : ''
 </script>
 
 <main>
