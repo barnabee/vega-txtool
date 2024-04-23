@@ -93,7 +93,7 @@
       bind:output={outputText} />
   </section>
   <footer>
-    <p>❤️ <a href="https://github.com/barnabee/vega-txtool">Source on GitHub</a> ✨</p>
+    <p>✨ <a href="https://github.com/barnabee/vega-txtool">Source on GitHub</a> ✨</p>
   </footer>
  </main>
 
