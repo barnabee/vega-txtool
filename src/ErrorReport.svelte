@@ -28,7 +28,7 @@
       || (otherError !== null && otherError !== '')
 </script>
 
-<div class:error={isErrorState}>
+<div class="error-report" class:error={isErrorState}>
   {#if !inputJson || ('string' === typeof inputJson && inputJson.trim() === '') }
     <p><strong>No input.</strong> Paste transaction command JSON above.</p>
   {:else if jsonError !== null || (inputJson !== '' && inputData?.command === null)}

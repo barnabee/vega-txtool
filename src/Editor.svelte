@@ -14,7 +14,7 @@
   const dispatch = createEventDispatcher()
 </script>
 
-<div>
+<div class="transaction-editor">
   <CodeMirror 
     bind:value
     on:change={e=>dispatch('change', e)}
