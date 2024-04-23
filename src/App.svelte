@@ -2,8 +2,8 @@
   import { vega } from '@vegaprotocol/protos'
   import * as vegaSchema from '../vega-schema.json'
    
-  import { stringifyWithBigNumbers, parseOr, jsonErrorHelp, type Delta } from './lib/jsonutils'
-  import { checkProtoShape, outputFormatters, type ProtoCheckResult } from './lib/vegahelpers'
+  import { stringifyWithBigNumbers, parseOr } from './lib/jsonutils'
+  import { checkProtoShape, outputFormatters, type ProtoCheckResult, type Delta } from './lib/vegahelpers'
   import { 
     setState, 
     onStateChanged, 

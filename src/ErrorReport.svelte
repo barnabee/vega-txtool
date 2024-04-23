@@ -15,7 +15,7 @@
   export let otherError: string | null
   export let left: any
   export let right: any
-  export let delta: Delta
+  export let delta: Delta | null
   export let showUnchanged: boolean
 
   $: htmlFormatter.showUnchanged(showUnchanged)
