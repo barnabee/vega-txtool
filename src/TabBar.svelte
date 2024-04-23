@@ -1,6 +1,6 @@
 <script lang="ts">
    export let tabs: {[key: string]: any} = []
-   export let name: (t: any, id: string) => string = (t, id) => t['name'] || id
+   export let name: (t: any, id: string) => string = (t, id) => t?.name || id
    export let selected: string | null
 </script>
 
