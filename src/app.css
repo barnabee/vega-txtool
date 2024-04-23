@@ -30,7 +30,6 @@ p {
 footer {
   margin-top: 1.5rem;
   color: #008800;
-  display: none;
 
   & p {
     text-align: center;
