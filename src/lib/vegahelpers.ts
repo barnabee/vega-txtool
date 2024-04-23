@@ -116,7 +116,7 @@ export const outputFormatters: {[key: string]: OutputFormatter} = {
     name: 'Mac/Linux Command',
     format(input: any): string {
       const escapedJson = stringifyWithBigNumbers(input, 0)
-          .replaceAll(`'`, `'\\''`)
+          ?.replaceAll(`'`, `'\\''`)
       return `vega wallet transaction send --wallet 'WALLET_NAME' --pubkey 'PUBLIC_KEY' --network mainnet1 '${escapedJson}'`
     }
   },
@@ -124,8 +124,8 @@ export const outputFormatters: {[key: string]: OutputFormatter} = {
     name: "Windows Command",
     format(input: any): string {
       const escapedJson = stringifyWithBigNumbers(input, 0)
-          .replaceAll('\\', '\\\\')
-          .replaceAll('"', '\\"')
+          ?.replaceAll('\\', '\\\\')
+          ?.replaceAll('"', '\\"')
       return `vegawallet.exe transaction send --wallet "WALLET_NAME" --pubkey "PUBLIC_KEY" --network mainnet1 "${escapedJson}"`
     }
   },
