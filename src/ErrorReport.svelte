@@ -32,7 +32,7 @@
   {#if !inputJson || ('string' === typeof inputJson && inputJson.trim() === '') }
     <p><strong>No input.</strong> Paste transaction command JSON above.</p>
   {:else if jsonError !== null || (inputJson !== '' && inputData?.command === null)}
-    <p><strong>Input is not valid JSON</strong></p>?
+    <p><strong>Input is not valid JSON</strong></p>
     {#if jsonError !== null}
       {#if jsonError.linesBefore && jsonError.linesBefore !== ''}
         <pre class="linesBefore">{jsonError.linesBefore}</pre>
@@ -82,5 +82,8 @@
     margin-bottom: 0.2rem;
     margin-top: 0.5rem;
     color: #FFC560;
+  }
+  pre {
+    padding-left: 1rem;
   }
 </style>
