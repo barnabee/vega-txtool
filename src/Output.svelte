@@ -4,7 +4,7 @@
   export let output: string
 </script>
 
-<div class="output">
+<div class="content">
   {#if inputJson !== '' && command !== null}
     <pre>{output}</pre>
   {:else if 'string' === typeof inputJson && inputJson.trim() === ''}

@@ -27,6 +27,7 @@ export async function unFuck(obj: any): Promise<any> {
     { at: 'chainEvent', elide: 'event' },
     { at: '**.changes.instrument', elide: 'product' },
     { at: '**.changes', elide: 'riskParameters' },
+    { at: '**.changes', elide: 'change' },
     { at: '**.fallsBelow', elide: 'trigger' },
     { at: '**.newTransfer.changes', elide: 'kind' },
     { at: '**.risesAbove', elide: 'trigger' },
@@ -95,38 +96,38 @@ export async function checkProtoShape(tx: any): Promise<ProtoCheckResult> {
 
 type OutputFormatter = {
   name: string,
-  format: (input: any) => string
+  format: (input: any, walletName: string, publicKey: string) => string
 }
 
 /** Functions to format Vega command JSON for various uses e.g. *nix/Windows command line, etc. */
 export const outputFormatters: {[key: string]: OutputFormatter} = {
   json: {
     name: 'Raw JSON',
-    format(input: any): string {
+    format(input: any, walletName: string, publicKey: string): string {
       return stringifyWithBigNumbers(input, 0)
     }
   },
   json_pretty: {
     name: 'Pretty JSON',
-    format(input: any): string {
+    format(input: any, walletName: string, publicKey: string): string {
       return stringifyWithBigNumbers(input)
     }
   },
   unix_cmd: {
     name: 'Mac/Linux Command',
-    format(input: any): string {
+    format(input: any, walletName: string, publicKey: string): string {
       const escapedJson = stringifyWithBigNumbers(input, 0)
           ?.replaceAll(`'`, `'\\''`)
-      return `vega wallet transaction send --wallet 'WALLET_NAME' --pubkey 'PUBLIC_KEY' --network mainnet1 '${escapedJson}'`
+      return `vega wallet transaction send --wallet '${walletName}' --pubkey '${publicKey}' --network mainnet1 '${escapedJson}'`
     }
   },
   windows_cmd: {
     name: "Windows Command",
-    format(input: any): string {
+    format(input: any, walletName: string, publicKey: string): string {
       const escapedJson = stringifyWithBigNumbers(input, 0)
           ?.replaceAll('\\', '\\\\')
           ?.replaceAll('"', '\\"')
-      return `vegawallet.exe transaction send --wallet "WALLET_NAME" --pubkey "PUBLIC_KEY" --network mainnet1 "${escapedJson}"`
+      return `vegawallet.exe transaction send --wallet "${walletName}" --pubkey "${publicKey}" --network mainnet1 "${escapedJson}"`
     }
   },
 }

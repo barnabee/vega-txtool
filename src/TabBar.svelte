@@ -30,6 +30,7 @@
   }
   li  {
     display: inline-block;
+    border-radius: 4px 4px 0 0;
     &.selected {
       color: #ffc560;
       background-color: #282c34;

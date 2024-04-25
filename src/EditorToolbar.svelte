@@ -7,6 +7,7 @@
   export let right: any
   export let delta: any
   export let showUnchanged: boolean
+  export let settingsDialog: HTMLDialogElement
 </script>
 
 <menu class="toolbar" id="editor-toolbar">
@@ -26,6 +27,8 @@
       bind:checked={showUnchanged} />Show unchanged values in diff</label>
   </li>
   <li>
-    <button style="float: right; display: none;">Settings</button>
+    <button
+      style="float: right;"
+      on:click={()=>settingsDialog.showModal()}>Settings</button>
   </li>
 </menu>
