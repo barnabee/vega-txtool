@@ -98,11 +98,13 @@
       bind:showUnchanged />
   </section>
   <section>
+    {#if inputJson !== '' && command !== null}
     <TabBar tabs={outputFormatters} bind:selected={outputFormat}>
       <li id="copy-button">
         <button on:click={()=>navigator.clipboard.writeText(outputText)}>Copy ⧉</button>
       </li>
     </TabBar>
+    {/if}
     <Output
       bind:inputJson
       bind:command={left}

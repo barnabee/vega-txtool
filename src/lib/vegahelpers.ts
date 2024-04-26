@@ -103,13 +103,13 @@ type OutputFormatter = {
 export const outputFormatters: {[key: string]: OutputFormatter} = {
   json: {
     name: 'Raw JSON',
-    format(input: any, walletName: string, publicKey: string): string {
+    format(input: any, _walletName: string, _publicKey: string): string {
       return stringifyWithBigNumbers(input, 0)
     }
   },
   json_pretty: {
     name: 'Pretty JSON',
-    format(input: any, walletName: string, publicKey: string): string {
+    format(input: any, _walletName: string, _publicKey: string): string {
       return stringifyWithBigNumbers(input)
     }
   },

@@ -48,8 +48,8 @@
     <div class="content">
       {#if settingsTab === 'user'}
         <h3>Variables for wallet command generation</h3>
-        <p><label for="walletName">Wallet name<input type="text" bind:value={walletName} /></label></p>
-        <p><label for="publicKey">Public key<input type="text" bind:value={publicKey}  /></label></p>
+        <p><label>Wallet name<input type="text" bind:value={walletName} /></label></p>
+        <p><label>Public key<input type="text" bind:value={publicKey}  /></label></p>
       {:else if settingsTab === 'ui'}
         <p>WIP</p>
       {/if}
