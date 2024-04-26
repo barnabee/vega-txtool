@@ -24,7 +24,7 @@
   <li id="show-unchanged">
     <label><input
       type="checkbox"
-      bind:checked={showUnchanged} />Show unchanged values in diff</label>
+      bind:checked={showUnchanged} />Show unchanged</label>
   </li>
   <li>
     <button

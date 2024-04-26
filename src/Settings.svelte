@@ -63,15 +63,11 @@
 
 <style>
   dialog {
-    min-width: 40rem;
+    min-width: 100%;
+    @media (min-width: 641px) {
+      min-width: 35rem;
+    }
     min-height: 20rem;
-  }
-  .content label {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-  input {
-    flex-grow: 1;
+    resize: horizontal;
   }
 </style>

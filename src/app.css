@@ -2,6 +2,7 @@
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 12px;
   background-color: black;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -9,12 +10,21 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+@media (min-width: 641px) {
+  :root {
+    font-size: 14px;
+  }
+
+  body {
+    padding: 2rem 2rem 4rem 2rem;
+  }
+}
+
 body {
   background-color: black;
-  padding: 2rem 2rem 4rem 2rem;
   color: #d9d9d9;
-  font-size: 14px;
-  touch-action: none;
+  padding-top: 1rem;
+  /* touch-action: none; */
 }
 
 p {
@@ -39,7 +49,8 @@ header {
 }
 
 footer {
-  margin-top: 1.5rem;
+  margin: 1.5rem 0;
+  padding-bottom: 2rem;
   color: #008800;
 
   & p {
@@ -114,6 +125,16 @@ dialog,
 
 .content {
   background-color: #282c34;
+
+  & label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    & input[type=text] {
+      flex-grow: 1;
+    }
+  }
 }
 
 menu.toolbar {
@@ -131,8 +152,8 @@ menu.toolbar {
 
 button {
   border-style: outset;
-  font-size: 0.8rem;
-  padding: 0.2rem 0.3rem;
+  /* font-size: 1rem; */
+  padding: 0.25rem 0.5rem;
   background-color: #bbbbbb;
 
   &:not(:disabled) {
@@ -144,10 +165,8 @@ button {
   }
 }
 
-label {
-  &:not(:disabled) {
-    cursor: pointer;
-  }
+label:not(:disabled) {
+  cursor: pointer;
 }
 
 input[type=checkbox] {
@@ -173,7 +192,7 @@ pre,
 .code,
 .jsondiffpatch-delta {
   font-family: "JetBrains Mono", monospace !important;
-  font-size: 13px !important;
+  font-size: 0.9rem !important;
   min-width: 40%;
 }
 

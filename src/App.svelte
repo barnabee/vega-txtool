@@ -39,7 +39,7 @@
   // Called when URL hash changes
   onStateChanged(s => inputJson = s || '')
 
-   // Get the roundtrip result and diff with input (has to be async because of the diff library)
+  // Get the roundtrip result and diff with input (has to be async because of the diff library)
   async function processInput(parsedObj: any) {
     checkResult = await checkProtoShape(parsedObj)
     left = checkResult?.left

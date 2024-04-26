@@ -16,7 +16,6 @@
 
 <style>
   div {
-    background-color: #282c34;
     padding: 1rem;
   }
   pre {

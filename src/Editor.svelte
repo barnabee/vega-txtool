@@ -26,7 +26,7 @@
       "&":{
         height: "42rem",
         minHeight: "8rem",
-        fontSize: "13px",
+        fontSize: "0.9rem",
         resize: "vertical",
         overflow: "hidden",
       },
