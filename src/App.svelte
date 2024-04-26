@@ -21,7 +21,6 @@
   // UI state and settings
   let editorView: any
   let settingsDialog: HTMLDialogElement
-  let settingsTab = 'user'
   let showUnchanged = false
   let outputFormat = localStorage.outputFormat || 'json'
   $: localStorage.setItem('outputFormat', outputFormat)  // remember selected output format

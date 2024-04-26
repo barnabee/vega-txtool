@@ -12,7 +12,7 @@
 body {
   background-color: black;
   padding: 2rem 2rem 4rem 2rem;
-  color: #dddddd;
+  color: #d9d9d9;
   font-size: 14px;
   touch-action: none;
 }
@@ -87,7 +87,7 @@ dialog,
   footer {
     padding: 1rem;
     margin: 0;
-    color: #bbbbbb;
+    color: #eeeeee;
     flex-grow: 0;
   }
 
@@ -144,8 +144,10 @@ button {
   }
 }
 
-label:not(:disabled) {
-  cursor: pointer;
+label {
+  &:not(:disabled) {
+    cursor: pointer;
+  }
 }
 
 input[type=checkbox] {
@@ -154,13 +156,21 @@ input[type=checkbox] {
 
 input[type=text] {
   padding: 0.3rem;
-  background-color: #383c44;
-  border: inset 1px #383c44;
+  background-color: #02525e;
+  border: inset 1px #687c84;
   margin-left: 0.5rem;
-  color: #bbbbff;
+  color: #eeeeee;
+}
+
+input:focus {
+  border: inset 1px #5190a9;
+  outline: none;
+  background-color: #016170;
+  color: #ffffff;
 }
 
 pre,
+.code,
 .jsondiffpatch-delta {
   font-family: "JetBrains Mono", monospace !important;
   font-size: 13px !important;
