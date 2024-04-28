@@ -1,0 +1,12 @@
+{
+  "name": "TX Tool",
+  "display": "standalone",
+  "start_url": "https://decent.markets/tx/",
+  "icons": [
+    {
+      "src": "rolling-a-white.png",
+      "type": "image/png",
+      "sizes": "913x918"
+    }
+  ]
+}

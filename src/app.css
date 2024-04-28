@@ -2,7 +2,7 @@
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 12px;
+  font-size: 0.75rem;
   background-color: black;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -12,7 +12,7 @@
 
 @media (min-width: 641px) {
   :root {
-    font-size: 14px;
+    font-size: 0.85rem;
   }
 
   body {
@@ -103,7 +103,7 @@ dialog,
   }
 
   & button {
-    padding: 0.4rem 1em;
+    padding: 0.4rem 1rem;
   }
 
   & section {
@@ -175,7 +175,7 @@ input[type=checkbox] {
 
 input[type=text] {
   padding: 0.3rem;
-  background-color: #02525e;
+  background-color: #004b56;
   border: inset 1px #687c84;
   margin-left: 0.5rem;
   color: #eeeeee;
@@ -184,7 +184,7 @@ input[type=text] {
 input:focus {
   border: inset 1px #5190a9;
   outline: none;
-  background-color: #016170;
+  background-color: #016575;
   color: #ffffff;
 }
 

@@ -5,4 +5,7 @@ import { svelte } from '@sveltejs/vite-plugin-svelte'
 export default defineConfig({
   base: '/tx/',
   plugins: [svelte()],
+  build: {
+    chunkSizeWarningLimit: 16384
+  }
 })

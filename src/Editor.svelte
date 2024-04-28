@@ -24,7 +24,7 @@
     extensions={[schemaValidator]} 
     styles={{
       "&":{
-        height: "42rem",
+        height: "30rem",
         minHeight: "8rem",
         fontSize: "0.9rem",
         resize: "vertical",
