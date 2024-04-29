@@ -34,18 +34,10 @@
   {:else if jsonError !== null || (inputJson !== '' && inputData?.command === null)}
     <p><strong>Input is not valid JSON</strong></p>
     {#if jsonError !== null}
-      {#if jsonError.linesBefore && jsonError.linesBefore !== ''}
-        <pre class="linesBefore">{jsonError.linesBefore}</pre>
-      {/if}
-      {#if jsonError.errorLine && jsonError.errorLine !== ''}
-        <pre class="errorLine">{jsonError.errorLine}</pre>
-      {/if}
-      {#if jsonError.errorMessage && jsonError.errorMessage !== ''}
-        <pre class="errorMessage">{jsonError.errorMessage}</pre>
-      {/if}
-      {#if jsonError.linesAfter && jsonError.linesAfter !== ''}
-        <pre class="linesAfter">{jsonError.linesAfter}</pre>
-      {/if}
+      {#if jsonError?.linesBefore !== ''}<pre class="linesBefore">{jsonError.linesBefore}</pre> {/if}
+      {#if jsonError?.errorLine !== ''}<pre class="errorLine">{jsonError.errorLine}</pre> {/if}
+      {#if jsonError?.errorMessage !== ''}<pre class="errorMessage">{jsonError.errorMessage}</pre> {/if}
+      {#if jsonError?.linesAfter !== ''}<pre class="linesAfter">{jsonError.linesAfter}</pre> {/if}
     {/if}
   {:else if right === null && otherError === null}  
     <p>Input contains no data matching a Vega command.</p>
