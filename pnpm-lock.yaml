@@ -29,6 +29,9 @@ devDependencies:
   jsondiffpatch:
     specifier: ^0.6.0
     version: 0.6.0
+  monaco-editor:
+    specifier: ^0.48.0
+    version: 0.48.0
   svelte:
     specifier: ^4.2.15
     version: 4.2.15
@@ -1172,6 +1175,10 @@ packages:
     hasBin: true
     dependencies:
       minimist: 1.2.8
+    dev: true
+
+  /monaco-editor@0.48.0:
+    resolution: {integrity: sha512-goSDElNqFfw7iDHMg8WDATkfcyeLTNpBHQpO8incK6p5qZt5G/1j41X0xdGzpIkGojGXM+QiRQyLjnfDVvrpwA==}
     dev: true
 
   /moo@0.5.2:

@@ -124,7 +124,8 @@ dialog,
 }
 
 .content {
-  background-color: #282c34;
+  /* background-color: #282c34; */
+  background-color: #1e1e1e;
 
   & label {
     display: flex;

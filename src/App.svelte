@@ -1,6 +1,5 @@
 <script lang="ts">
   import { vega } from '@vegaprotocol/protos'
-  import * as vegaSchema from '../vega-schema.json'
    
   import { stringifyWithBigNumbers, parseOr } from './lib/jsonutils'
   import { checkProtoShape, outputFormatters, type ProtoCheckResult, type Delta } from './lib/vegahelpers'
@@ -11,7 +10,8 @@
     saveCheckpointIfDirty } from './lib/stateCheckpoint'
 
   import EditorToolbar from './EditorToolbar.svelte'
-  import Editor from './Editor.svelte'
+  // import Editor from './Editor.svelte'
+  import MonacoEditor from './MonacoEditor.svelte'
   import ErrorReport from './ErrorReport.svelte'
   import TabBar from './TabBar.svelte'
   import Output from './Output.svelte'
@@ -81,11 +81,12 @@
       bind:left={left}
       bind:right={right}
       bind:delta={delta} />
-    <Editor
+    <!--<Editor
       bind:value={inputJson}
       schema={vegaSchema}
       on:change={resetCheckpointTimeout}
-      bind:editorView />
+      bind:editorView />-->
+    <MonacoEditor bind:value={inputJson} />
     <ErrorReport
       bind:inputJson
       bind:inputData={tx}

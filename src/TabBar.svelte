@@ -33,7 +33,8 @@
     border-radius: 4px 4px 0 0;
     &.selected {
       color: #ffc560;
-      background-color: #282c34;
+      /* background-color: #282c34; */
+      background-color: #1e1e1e;
     }
   }
   label {
