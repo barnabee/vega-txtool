@@ -71,9 +71,9 @@
       if (matchText !== null && matchText in entities) {
         hints.push({
           kind: monaco.languages.InlayHintKind.Type,
-          position: { column: match.range.endColumn, lineNumber: match.range.endLineNumber },
+          position: { column: match.range.startColumn, lineNumber: match.range.startLineNumber },
           label: entities[matchText],
-          paddingLeft: true,
+          paddingRight: true,
         })
       }
     }
