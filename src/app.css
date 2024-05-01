@@ -2,7 +2,7 @@
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   background-color: black;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -11,10 +11,6 @@
 }
 
 @media (min-width: 641px) {
-  :root {
-    font-size: 0.85rem;
-  }
-
   body {
     padding: 2rem 2rem 4rem 2rem;
   }
