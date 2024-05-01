@@ -10,6 +10,7 @@ let stateChangedHandler: (state: any) => void = () => {}
 
 export function setState(newState: string): void {
   stateValue = newState
+  resetCheckpointTimeout()
 }
 
 export function onStateChanged(cb: (state: any) => void) {

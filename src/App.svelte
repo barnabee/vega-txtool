@@ -6,7 +6,6 @@
   import { 
     setState, 
     onStateChanged, 
-    resetCheckpointTimeout, 
     saveCheckpointIfDirty } from './lib/stateCheckpoint'
 
   import EditorToolbar from './EditorToolbar.svelte'
@@ -19,7 +18,6 @@
   import { type SettingsData } from './Settings.svelte';
   
   // UI state and settings
-  let editorView: any
   let settingsDialog: HTMLDialogElement
   let showUnchanged = false
   let outputFormat = localStorage.outputFormat || 'json'
@@ -81,12 +79,8 @@
       bind:left={left}
       bind:right={right}
       bind:delta={delta} />
-    <!--<Editor
-      bind:value={inputJson}
-      schema={vegaSchema}
-      on:change={resetCheckpointTimeout}
-      bind:editorView />-->
-    <MonacoEditor bind:value={inputJson} />
+    <MonacoEditor
+      bind:value={inputJson} />
     <ErrorReport
       bind:inputJson
       bind:inputData={tx}

@@ -11,21 +11,17 @@
     "scp": "pnpm build && scp -r dist/* root@172.232.146.72:/srv/static/decent.markets/tx"
   },
   "devDependencies": {
-    "@codemirror/lang-json": "^6.0.1",
-    "@codemirror/theme-one-dark": "^6.1.2",
     "@sveltejs/vite-plugin-svelte": "^3.1.0",
     "@tsconfig/svelte": "^5.0.4",
     "@vegaprotocol/protos": "^0.14.0",
-    "codemirror-json-schema": "^0.7.0",
     "jsonata": "^2.0.4",
     "jsondiffpatch": "^0.6.0",
     "monaco-editor": "^0.48.0",
     "svelte": "^4.2.15",
-    "svelte-check": "^3.6.9",
-    "svelte-codemirror-editor": "^1.3.0",
+    "svelte-check": "^3.7.0",
     "tslib": "^2.6.2",
     "typescript": "^5.4.5",
-    "vite": "^5.2.9"
+    "vite": "^5.2.10"
   },
   "packageManager": "pnpm@8.15.5+sha256.4b4efa12490e5055d59b9b9fc9438b7d581a6b7af3b5675eb5c5f447cee1a589"
 }

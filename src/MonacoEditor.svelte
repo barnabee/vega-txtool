@@ -35,7 +35,7 @@
     }
   }
 
-  let editorInstance: Monaco.editor.IStandaloneCodeEditor
+  let editorInstance: Monaco.editor.IStandaloneCodeEditor | null = null
   export let value = ''
   $: editorInstance?.getModel()?.getValue() !== value && editorInstance?.getModel()?.setValue(value)
   
@@ -64,12 +64,13 @@
       model,
     })
     editorInstance.onDidChangeModelContent(() => {
-      value = editorInstance.getValue()
+      if (editorInstance !== null) value = editorInstance.getValue()
     })
     return { 
       destroy() {
         monaco?.editor.getModels().forEach(model => model.dispose())
         editorInstance?.dispose()
+        editorInstance = null
       }
     }
   }
