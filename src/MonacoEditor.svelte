@@ -37,7 +37,7 @@
 
   let editorInstance: Monaco.editor.IStandaloneCodeEditor
   export let value = ''
-  $: editorInstance?.getModel()?.setValue(value)
+  $: editorInstance?.getModel()?.getValue() !== value && editorInstance?.getModel()?.setValue(value)
   
   const modelUri = monaco.Uri.parse('vega://transaction')
   const model = monaco.editor.createModel(value, 'json', modelUri)
@@ -59,6 +59,7 @@
       minimap: { enabled: false },
       automaticLayout: true,
       formatOnPaste: true,
+      formatOnType: true,
       fontFamily: 'JetBrains Mono, monospace',
       model,
     })
