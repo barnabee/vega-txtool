@@ -44,6 +44,9 @@
 
   monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
   	validate: true,
+  	comments: 'warning',
+  	schemaValidation: 'error',
+  	trailingCommas: 'error',
   	schemas: [
   		{
   			uri: modelUri.toString(),
