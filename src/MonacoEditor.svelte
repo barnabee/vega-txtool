@@ -44,7 +44,8 @@
 
   monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
   	validate: true,
-  	comments: 'warning',
+  	comments: 'ignore',
+  	allowComments: true,
   	schemaValidation: 'error',
   	trailingCommas: 'error',
   	schemas: [
@@ -66,6 +67,7 @@
       fontFamily: 'JetBrains Mono, monospace',
       fontSize: 12,
       contextmenu: false,
+      wordWrap: 'on',
       model,
     })
     editorInstance.onDidChangeModelContent(() => {
