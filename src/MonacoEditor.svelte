@@ -41,7 +41,7 @@
   
   const modelUri = monaco.Uri.parse('vega://transaction')
   const model = monaco.editor.createModel(value, 'json', modelUri)
-  
+
   monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
   	validate: true,
   	schemas: [
@@ -61,6 +61,8 @@
       formatOnPaste: true,
       formatOnType: true,
       fontFamily: 'JetBrains Mono, monospace',
+      fontSize: 12,
+      contextmenu: false,
       model,
     })
     editorInstance.onDidChangeModelContent(() => {
