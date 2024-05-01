@@ -12,6 +12,7 @@
   import tsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker'
 
   import * as vegaTransactionSchema from '../vega-schema.json'
+  import { entities } from './lib/vegadescriptors'
 
   self.MonacoEnvironment = {
     getWorker: function (_: string, label: string) {
@@ -56,6 +57,30 @@
   		},
   	],
   });
+
+  function provideInlayHints(
+      model: monaco.editor.ITextModel,
+      range: monaco.IRange,
+      _token: monaco.CancellationToken) {
+    const matches = model.findMatches('"[a-zA-Z0-9]+"', range, true, false, null, true)
+    const hints: monaco.languages.InlayHint[] = []
+    for (let match of matches) {
+      const matchText: string | null = (match.matches !== null && match.matches.length > 0)
+          ? JSON.parse(match.matches[0]).toString().toLowerCase() 
+          : null 
+      if (matchText !== null && matchText in entities) {
+        hints.push({
+          kind: monaco.languages.InlayHintKind.Type,
+          position: { column: match.range.endColumn, lineNumber: match.range.endLineNumber },
+          label: entities[matchText],
+          paddingLeft: true,
+        })
+      }
+    }
+    return { hints, dispose() {} }
+  }
+
+  monaco.languages.registerInlayHintsProvider('json', { provideInlayHints })
   
   function editor(editorContainer: HTMLElement) {
     editorInstance = monaco.editor.create(editorContainer, {
