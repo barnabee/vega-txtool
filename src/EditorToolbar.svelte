@@ -7,6 +7,7 @@
   export let right: any
   export let delta: any
   export let showUnchanged: boolean
+  export let previewChanges: boolean
   export let settingsDialog: HTMLDialogElement
 </script>
 
@@ -25,6 +26,12 @@
     <label><input
       type="checkbox"
       bind:checked={showUnchanged} />Show unchanged</label>
+  </li>
+  <li id="preview-changes">
+    <label><input
+      type="checkbox"
+      disabled={!left?.batchProposalSubmission}
+      bind:checked={previewChanges} />Preview changes</label>
   </li>
   <li>
     <button

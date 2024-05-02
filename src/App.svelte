@@ -16,10 +16,12 @@
   import Output from './Output.svelte'
   import Settings from './Settings.svelte';
   import { type SettingsData } from './Settings.svelte';
+    import ChangePreview from './ChangePreview.svelte';
   
   // UI state and settings
   let settingsDialog: HTMLDialogElement
   let showUnchanged = false
+  let previewChanges = false
   let outputFormat = localStorage.outputFormat || 'json'
   $: localStorage.setItem('outputFormat', outputFormat)  // remember selected output format
 
@@ -76,11 +78,17 @@
       bind:settingsDialog={settingsDialog}
       bind:input={inputJson}
       bind:showUnchanged
+      bind:previewChanges
       bind:left={left}
       bind:right={right}
       bind:delta={delta} />
-    <MonacoEditor
-      bind:value={inputJson} />
+    {#if previewChanges}
+      <ChangePreview
+        transaction={left} />
+    {:else}
+      <MonacoEditor
+        bind:value={inputJson} />
+    {/if}
     <ErrorReport
       bind:inputJson
       bind:inputData={tx}

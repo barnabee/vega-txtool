@@ -91,6 +91,7 @@
       formatOnType: true,
       fontFamily: 'JetBrains Mono, monospace',
       fontSize: 12,
+      tabSize: 2,
       contextmenu: false,
       wordWrap: 'on',
       model,
