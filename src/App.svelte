@@ -100,6 +100,7 @@
       bind:showUnchanged />
     {/if}
   </section>
+  {#if !previewChanges}
   <section>
     {#if inputJson !== '' && command !== null}
     <TabBar tabs={outputFormatters} bind:selected={outputFormat}>
@@ -113,6 +114,7 @@
       bind:command={left}
       bind:output={outputText} />
   </section>
+  {/if}
   <footer>
     <p>✨ <a href="https://github.com/barnabee/vega-txtool">Source on GitHub</a> ✨</p>
   </footer>

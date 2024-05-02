@@ -40,10 +40,9 @@
         if (change?.updateMarket) marketChanges.push(change?.updateMarket)
       }
     } 
-    else if (tx?.proposalSubmission) {
-      //TODO: handle single market updates
+    else if (tx?.proposalSubmission?.terms?.updateMarket?.changes) {
+      marketChanges.push(tx?.proposalSubmission?.terms?.updateMarket)
     }
-    console.log(marketChanges)
     return marketChanges
   }
 
