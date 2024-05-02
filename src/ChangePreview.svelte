@@ -54,9 +54,6 @@
   })) || []
 </script>
 
-{#if diffs.length === 0}
-  <div><p>Building diffs...</p></div>
-{/if}
 {#each diffs as diff}
   {#if latestProposals[diff.id]}
   <div>
@@ -66,6 +63,14 @@
     </div>
   </div>
   {/if}
+{:else}
+  <div>
+  {#if transaction?.batchProposalSubmission || transaction?.proposalSubmission}
+    <p>Building diffs...</p>
+  {:else}
+    <p>No proposals found to diff, or maybe some sort of error.</p>
+  {/if}
+  </div>
 {/each}
 
 <style>
