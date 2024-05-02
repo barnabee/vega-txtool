@@ -36,6 +36,7 @@
     }
   }
 
+  export let hidden = false
   let editorInstance: Monaco.editor.IStandaloneCodeEditor | null = null
   export let value = ''
   $: editorInstance?.getModel()?.getValue() !== value && editorInstance?.getModel()?.setValue(value)
@@ -110,11 +111,14 @@
 
 </script>
 
-<div class="transaction-editor">
+<div class="transaction-editor" class:hidden>
   <div use:editor />
 </div>
 
 <style>
+  div.hidden {
+    display: none;
+  }
   div.transaction-editor {
     padding: 0;
     width: 100%;

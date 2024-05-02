@@ -47,7 +47,7 @@
     return marketChanges
   }
 
-  $: marketChanges = collectChanges(transaction)
+  $: marketChanges = collectChanges(transaction).filter(c => !!latestProposals[c?.marketId])
   $: diffs = marketChanges?.map(changes => ({ 
     id: changes?.marketId,
     code: changes.changes?.instrument?.code,
@@ -55,13 +55,18 @@
   })) || []
 </script>
 
+{#if diffs.length === 0}
+  <div><p>Building diffs...</p></div>
+{/if}
 {#each diffs as diff}
+  {#if latestProposals[diff.id]}
   <div>
     <h2>{diff.code} <span style="font-size: 60%;font-weight: normal; font-family: monospace;">{diff.id}</span></h2>
-  <div class="content">
-    {@html diff.html}
+    <div class="content">
+      {@html diff.html}
+    </div>
   </div>
-  </div>
+  {/if}
 {/each}
 
 <style>

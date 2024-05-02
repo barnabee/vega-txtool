@@ -82,13 +82,13 @@
       bind:left={left}
       bind:right={right}
       bind:delta={delta} />
+    <MonacoEditor
+      hidden={previewChanges}
+      bind:value={inputJson} />
     {#if previewChanges}
-      <ChangePreview
-        transaction={left} />
+    <ChangePreview
+      transaction={left} />
     {:else}
-      <MonacoEditor
-        bind:value={inputJson} />
-    {/if}
     <ErrorReport
       bind:inputJson
       bind:inputData={tx}
@@ -98,6 +98,7 @@
       bind:right
       bind:delta 
       bind:showUnchanged />
+    {/if}
   </section>
   <section>
     {#if inputJson !== '' && command !== null}
