@@ -9,25 +9,36 @@
 
   let latestProposals: { [key: string]: any } = {}
   async function getProposals() {
+    function processProposal(p: any, ptype: string) {
+      console.log('got:', ptype, p)
+      const marketId = p?.terms?.updateMarket?.marketId
+      const existingTimestamp = latestProposals[marketId]?.timestamp || 0
+      const timestamp = p?.terms?.enactmentTimestamp
+      const proposal = p?.terms?.newMarket || p?.terms?.updateMarket
+      if (marketId && timestamp > existingTimestamp) latestProposals[marketId] = { 
+        timestamp, 
+        changes: proposal.changes
+      }
+    }
+  
     const allUpdateMarketProposals = await (await fetch('https://api.vega.community/api/v2/governances?proposalType=TYPE_UPDATE_MARKET&proposalState=STATE_ENACTED')).json()
     const allNewMarketProposals = await (await fetch('https://api.vega.community/api/v2/governances?proposalType=TYPE_NEW_MARKET&proposalState=STATE_ENACTED')).json()
 
     for (let newMarket of allNewMarketProposals?.connection?.edges) {
-      const marketId = newMarket?.node?.proposal?.id
-      const timestamp = newMarket?.node?.proposal?.terms?.enactmentTimestamp
-      if (marketId) latestProposals[marketId] = { 
-        timestamp, 
-        changes: newMarket?.node?.proposal?.terms?.newMarket?.changes
-      }
+      processProposal(newMarket?.node?.proposal, 'NEW')  
     }
     
-    for (let updateMarket of allUpdateMarketProposals?.connection?.edges) {
-      const marketId = updateMarket?.node?.proposal?.terms?.updateMarket?.marketId
-      const existingTimestamp = latestProposals[marketId]?.timestamp || 0
-      const timestamp = updateMarket?.node?.proposal?.terms?.enactmentTimestamp
-      if (marketId && timestamp > existingTimestamp) latestProposals[marketId] = { 
-        timestamp, 
-        changes: updateMarket?.node?.proposal?.terms?.updateMarket?.changes
+    for (let proposal of allUpdateMarketProposals?.connection?.edges) {
+      if (proposal?.node?.proposalType === 'TYPE_BATCH' && proposal?.node?.proposals.length > 0) {
+        for (let batchProposal of proposal?.node?.proposals) {
+          processProposal(batchProposal, 'BATCH_UPDATE')
+        }
+      }
+      else if (proposal?.node?.proposalType === 'TYPE_SINGLE_OR_UNSPECIFIED') {
+        processProposal(proposal?.node?.proposal, 'SINGLE_UPDATE')
+      }
+      else {
+        console.log('error: processing market update proposals, unknown type or empty batch', proposal)
       }
     }
   }
