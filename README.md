@@ -13,6 +13,9 @@ A simple tool to check Vega transacton JSON.
 - Encodes the input data in the URL hash for ease of sharing.
 
 - Autocompletes and provides documentation tooltips for most commands.
+  
+- Diffs market updates against latest enacted proposal to allow analysis of the impact of a market change proposal prior to submission.
+  
 
 ## Known limitations
 
