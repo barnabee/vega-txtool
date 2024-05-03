@@ -3,7 +3,7 @@
   import 'jsondiffpatch/formatters/styles/annotated.css'
   
   import * as htmlFormatter from 'jsondiffpatch/formatters/html'
-  import type { Delta } from 'jsondiffpatch';
+  import type { Delta } from 'jsondiffpatch'
   
   import { vega } from '@vegaprotocol/protos'
   

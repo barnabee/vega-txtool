@@ -10,7 +10,7 @@
   let latestProposals: { [key: string]: any } = {}
   async function getProposals() {
     function processProposal(p: any, ptype: string) {
-      console.log('got:', ptype, p)
+      // console.log('got:', ptype, p)
       const marketId = p?.terms?.updateMarket?.marketId
       const existingTimestamp = latestProposals[marketId]?.timestamp || 0
       const timestamp = p?.terms?.enactmentTimestamp
