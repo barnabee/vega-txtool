@@ -95,6 +95,10 @@
       tabSize: 2,
       contextmenu: false,
       wordWrap: 'on',
+      stickyScroll: {
+        enabled: true,
+        maxLineCount: 12,
+      },
       model,
     })
     editorInstance.onDidChangeModelContent(() => {
@@ -122,7 +126,7 @@
   div.transaction-editor {
     padding: 0;
     width: 100%;
-    height: 30rem;
+    height: 40rem;
     resize: vertical;
     overflow: hidden;
     & > div {

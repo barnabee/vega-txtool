@@ -9,38 +9,35 @@
 
   let latestProposals: { [key: string]: any } = {}
   async function getProposals() {
-    function processProposal(p: any, ptype: string) {
-      // console.log('got:', ptype, p)
-      const marketId = p?.terms?.updateMarket?.marketId
-      const existingTimestamp = latestProposals[marketId]?.timestamp || 0
-      const timestamp = p?.terms?.enactmentTimestamp
-      const proposal = p?.terms?.newMarket || p?.terms?.updateMarket
-      if (marketId && timestamp > existingTimestamp) latestProposals[marketId] = { 
-        timestamp, 
-        changes: proposal.changes
+    function processProposal(proposal: any) {
+      const proposalParts: any[] = proposal?.node?.proposalType === 'TYPE_BATCH'
+        ? proposal?.node?.proposals
+        : [proposal?.node?.proposal]
+      for (let p of proposalParts) {
+        const marketId = p?.terms?.updateMarket?.marketId || (p?.terms?.newMarket && p?.id)
+        const existingTimestamp = latestProposals[marketId]?.timestamp || 0
+        const timestamp = p?.terms?.enactmentTimestamp
+        const changes = (p?.terms?.newMarket || p?.terms?.updateMarket)?.changes
+        if (marketId && timestamp > existingTimestamp) {
+          latestProposals[marketId] = { timestamp, changes }
+        }
+        else {
+          console.log(p)
+        }
       }
     }
   
-    const allUpdateMarketProposals = await (await fetch('https://api.vega.community/api/v2/governances?proposalType=TYPE_UPDATE_MARKET&proposalState=STATE_ENACTED')).json()
     const allNewMarketProposals = await (await fetch('https://api.vega.community/api/v2/governances?proposalType=TYPE_NEW_MARKET&proposalState=STATE_ENACTED')).json()
 
-    for (let newMarket of allNewMarketProposals?.connection?.edges) {
-      processProposal(newMarket?.node?.proposal, 'NEW')  
-    }
+    for (let proposal of allNewMarketProposals?.connection?.edges) {
+      processProposal(proposal)
+    }  
     
+    const allUpdateMarketProposals = await (await fetch('https://api.vega.community/api/v2/governances?proposalType=TYPE_UPDATE_MARKET&proposalState=STATE_ENACTED')).json()
+
     for (let proposal of allUpdateMarketProposals?.connection?.edges) {
-      if (proposal?.node?.proposalType === 'TYPE_BATCH' && proposal?.node?.proposals.length > 0) {
-        for (let batchProposal of proposal?.node?.proposals) {
-          processProposal(batchProposal, 'BATCH_UPDATE')
-        }
-      }
-      else if (proposal?.node?.proposalType === 'TYPE_SINGLE_OR_UNSPECIFIED') {
-        processProposal(proposal?.node?.proposal, 'SINGLE_UPDATE')
-      }
-      else {
-        console.log('error: processing market update proposals, unknown type or empty batch', proposal)
-      }
-    }
+      processProposal(proposal)
+    }  
   }
   getProposals()
   
@@ -68,7 +65,10 @@
 {#each diffs as diff}
   {#if latestProposals[diff.id]}
   <div>
+    <details>
+    <summary>
     <h2>{diff.code} <span style="font-size: 60%;font-weight: normal; font-family: monospace;">{diff.id}</span></h2>
+    </summary>
     <div class="content">
       {@html diff.html}
     </div>
@@ -86,6 +86,10 @@
 
 <style>
   h2 {
+    display: inline-block;
     margin-bottom: 1rem;
+  }
+  summary {
+    cursor: pointer;
   }
 </style>
