@@ -56,6 +56,9 @@
 </div>
 
 <style>
+  .error-report {
+    flex-shrink: 1;
+  }
   .linesBefore, .linesAfter {
     color: #aaaaaa;
   }

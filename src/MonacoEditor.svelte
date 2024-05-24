@@ -127,8 +127,10 @@
     padding: 0;
     width: 100%;
     height: 40rem;
+    min-height: 20rem;
     resize: vertical;
     overflow: hidden;
+    flex-grow: 1;
     & > div {
       height: 100%;
     }

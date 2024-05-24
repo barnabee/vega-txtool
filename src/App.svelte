@@ -9,14 +9,13 @@
     saveCheckpointIfDirty } from './lib/stateCheckpoint'
 
   import EditorToolbar from './EditorToolbar.svelte'
-  // import Editor from './Editor.svelte'
   import MonacoEditor from './MonacoEditor.svelte'
   import ErrorReport from './ErrorReport.svelte'
   import TabBar from './TabBar.svelte'
   import Output from './Output.svelte'
-  import Settings from './Settings.svelte';
-  import { type SettingsData } from './Settings.svelte';
-    import ChangePreview from './ChangePreview.svelte';
+  import Settings from './Settings.svelte'
+  import { type SettingsData } from './Settings.svelte'
+  import ChangePreview from './ChangePreview.svelte'
   
   // UI state and settings
   let settingsDialog: HTMLDialogElement
@@ -68,57 +67,66 @@
       ? outputFormatters[outputFormat].format(left, settings.walletName, settings.publicKey) : ''
 </script>
 
-<main>
-  <header>
-    <h1>Vega transaction tool</h1>
-  </header>
-  <section> 
-    <EditorToolbar 
-      update={updateInput}
-      bind:settingsDialog={settingsDialog}
-      bind:input={inputJson}
-      bind:showUnchanged
-      bind:previewChanges
-      bind:left={left}
-      bind:right={right}
-      bind:delta={delta} />
-    <MonacoEditor
-      hidden={previewChanges}
-      bind:value={inputJson} />
-    {#if previewChanges}
-    <ChangePreview
-      transaction={left} />
-    {:else}
-    <ErrorReport
-      bind:inputJson
-      bind:inputData={tx}
-      bind:jsonError={jsonError}
-      bind:otherError={otherError}
-      bind:left
-      bind:right
-      bind:delta 
-      bind:showUnchanged />
+<header>
+  <h1>Vega transaction tool</h1>
+</header>
+<main class="vsplit">
+  <nav class="panel">
+    <menu>
+      <li><a href="/tx">Transaction builder</a></li>
+      <!--<li><a href="/mk">Market history</a></li>-->
+    </menu>
+  </nav>
+  <div class="dynamic-col">
+    <section id="editor-panel">
+      <EditorToolbar 
+        update={updateInput}
+        bind:settingsDialog={settingsDialog}
+        bind:input={inputJson}
+        bind:showUnchanged
+        bind:previewChanges
+        bind:left={left}
+        bind:right={right}
+        bind:delta={delta} />
+      <MonacoEditor
+        hidden={previewChanges}
+        bind:value={inputJson} />
+      {#if previewChanges}
+      <ChangePreview
+        transaction={left} />
+      {:else}
+      <ErrorReport
+        bind:inputJson
+        bind:inputData={tx}
+        bind:jsonError={jsonError}
+        bind:otherError={otherError}
+        bind:left
+        bind:right
+        bind:delta 
+        bind:showUnchanged />
+      {/if}
+    </section>
+    {#if !previewChanges}
+    <section id="output-panel">
+      {#if inputJson !== '' && command !== null}
+      <TabBar tabs={outputFormatters} bind:selected={outputFormat}>
+        <li id="copy-button">
+          <button on:click={()=>navigator.clipboard.writeText(outputText)}>Copy ⧉</button>
+        </li>
+      </TabBar>
+      {/if}
+      <Output
+        bind:inputJson
+        bind:command={left}
+        bind:output={outputText} />
+    </section>
     {/if}
-  </section>
-  {#if !previewChanges}
-  <section>
-    {#if inputJson !== '' && command !== null}
-    <TabBar tabs={outputFormatters} bind:selected={outputFormat}>
-      <li id="copy-button">
-        <button on:click={()=>navigator.clipboard.writeText(outputText)}>Copy ⧉</button>
-      </li>
-    </TabBar>
-    {/if}
-    <Output
-      bind:inputJson
-      bind:command={left}
-      bind:output={outputText} />
-  </section>
-  {/if}
-  <footer>
-    <p>✨ <a href="https://github.com/barnabee/vega-txtool">Source on GitHub</a> ✨</p>
-  </footer>
+  </div>
 </main>
+
+<footer>
+  <p>✨ <a href="https://github.com/barnabee/vega-txtool">Source on GitHub</a> ✨</p>
+</footer>
 
 <Settings bind:settingsDialog bind:settings {saveSettings} />
 
@@ -139,5 +147,54 @@
         border: none;
       }
     }
+  }
+  #editor-panel {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  #output-panel {
+    flex-shrink: 1;
+  }
+  .vsplit {
+    flex-direction: row;
+    display: flex;
+    gap: 1em;
+    & > section {
+      flex-grow: 1;
+    }
+    width: 100%;
+  }
+  .dynamic-col {
+    min-width: 30em;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow: auto;
+  }
+  main {
+    width: 30em;
+    overflow: auto;
+  }
+  nav {
+    flex-basis: auto;
+    flex-shrink: 0;
+    padding: 1rem;
+    background-color: #111111;
+    border: 1px solid #444444;
+  }
+  header, footer {
+    & h1 {
+      font-weight: normal;
+      font-size: 1.5rem;
+    }
+    backdrop-filter: blur(2rem);
+    padding: 0.75rem 0.75rem;
+    border-radius: 0.5rem; 
+    border: 2px ridge #444444;
+    background-color: #222222;
+    color: #eeeeee;
   }
 </style>

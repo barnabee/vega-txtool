@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
-    "scp": "pnpm build && scp -r dist/* root@172.232.146.72:/srv/static/decent.markets/tx"
+    "upload": "pnpm build && rsync -vr -e ssh dist/ root@172.232.146.72:/srv/static/decent.markets/tx",
+    "_scp": "pnpm build && scp -r dist/* root@172.232.146.72:/srv/static/decent.markets/tx"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^3.1.0",

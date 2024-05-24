@@ -31,13 +31,13 @@
 
     for (let proposal of allNewMarketProposals?.connection?.edges) {
       processProposal(proposal)
-    }  
+    }
     
     const allUpdateMarketProposals = await (await fetch('https://api.vega.community/api/v2/governances?proposalType=TYPE_UPDATE_MARKET&proposalState=STATE_ENACTED')).json()
 
     for (let proposal of allUpdateMarketProposals?.connection?.edges) {
       processProposal(proposal)
-    }  
+    }
   }
   getProposals()
   
@@ -91,5 +91,8 @@
   }
   summary {
     cursor: pointer;
+    &::marker {
+      font-size: 2rem;
+    }
   }
 </style>

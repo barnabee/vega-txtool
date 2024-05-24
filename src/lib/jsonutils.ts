@@ -13,7 +13,7 @@ export function stringifyWithBigNumbers(obj: any, n = 2): string {
     if (typeof value === 'bigint') {
       return value.toString()
     }
-    return value; // return as is for other types
+    return value  // return as is for other types
   }, n)
 }
 
