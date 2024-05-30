@@ -126,8 +126,8 @@
   div.transaction-editor {
     padding: 0;
     width: 100%;
-    height: 40rem;
-    min-height: 20rem;
+    height: 30rem;
+    min-height: 15rem;
     resize: vertical;
     overflow: hidden;
     flex-grow: 1;

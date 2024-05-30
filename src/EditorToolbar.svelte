@@ -33,9 +33,8 @@
       disabled={(!left?.batchProposalSubmission) && (!left?.proposalSubmission)}
       bind:checked={previewChanges} />Preview changes</label>
   </li>
-  <li>
+  <li style="margin-left: auto;">
     <button
-      style="float: right;"
       on:click={()=>settingsDialog.showModal()}>Settings</button>
   </li>
 </menu>

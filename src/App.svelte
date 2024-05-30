@@ -71,9 +71,9 @@
   <h1>Vega transaction tool</h1>
 </header>
 <main class="vsplit">
-  <nav class="panel">
+  <nav>
     <menu>
-      <li><a href="/tx">Transaction builder</a></li>
+      <li><a href="/tx/">Transaction builder</a></li>
       <!--<li><a href="/mk">Market history</a></li>-->
     </menu>
   </nav>
@@ -156,45 +156,7 @@
   #output-panel {
     flex-shrink: 1;
   }
-  .vsplit {
-    flex-direction: row;
-    display: flex;
-    gap: 1em;
-    & > section {
-      flex-grow: 1;
-    }
-    width: 100%;
-  }
-  .dynamic-col {
-    min-width: 30em;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    overflow: auto;
-  }
   main {
-    width: 30em;
-    overflow: auto;
-  }
-  nav {
-    flex-basis: auto;
-    flex-shrink: 0;
-    padding: 1rem;
-    background-color: #111111;
-    border: 1px solid #444444;
-  }
-  header, footer {
-    & h1 {
-      font-weight: normal;
-      font-size: 1.5rem;
-    }
-    backdrop-filter: blur(2rem);
-    padding: 0.75rem 0.75rem;
-    border-radius: 0.5rem; 
-    border: 2px ridge #444444;
-    background-color: #222222;
-    color: #eeeeee;
+    min-width: 25em;
   }
 </style>
