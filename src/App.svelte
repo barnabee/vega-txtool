@@ -5,6 +5,7 @@
   import { checkProtoShape, outputFormatters, type ProtoCheckResult, type Delta } from './lib/vegahelpers'
   import { 
     setState, 
+    readHashValue,
     onStateChanged, 
     saveCheckpointIfDirty } from './lib/stateCheckpoint'
 
@@ -25,7 +26,8 @@
   $: localStorage.setItem('outputFormat', outputFormat)  // remember selected output format
 
   // Input, output, intermediate state, and errors for reporting
-  let inputJson = location.hash.slice(1) == '' ? '' : atob(location.hash.slice(1))  // init from URL hash
+  let inputJson = ''
+  readHashValue().then(s => inputJson = s)
   let tx: vega.commands.v1.InputData.InputData
   let checkResult: ProtoCheckResult | null = null
   let left: any, right: any, delta: Delta | null, otherError: string | null

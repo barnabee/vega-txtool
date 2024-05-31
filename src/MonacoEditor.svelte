@@ -78,6 +78,19 @@
         })
       }
     }
+
+    const tsMatches = model.findMatches('Timestamp":\\s*"([0-9]+)"', range, true, false, null, true)
+    for (let tsMatch of tsMatches) {
+      const timestamp = new Date(Number(tsMatch.matches[1] * 1000)).toISOString()
+      const startColumn = tsMatch.range.endColumn - tsMatch.matches[1].length - 2
+      hints.push({
+        kind: monaco.languages.InlayHintKind.Type,
+        position: { column: startColumn, lineNumber: tsMatch.range.startLineNumber },
+        label: timestamp,
+        paddingRight: true,
+      })
+    }
+
     return { hints, dispose() {} }
   }
 
