@@ -12,8 +12,8 @@ devDependencies:
     specifier: ^5.0.4
     version: 5.0.4
   '@vegaprotocol/protos':
-    specifier: ^0.14.0
-    version: 0.14.0
+    specifier: ^0.16.0
+    version: 0.16.0
   jsonata:
     specifier: ^2.0.4
     version: 2.0.4
@@ -487,8 +487,8 @@ packages:
     resolution: {integrity: sha512-Sk/uYFOBAB7mb74XcpizmH0KOR2Pv3D2Hmrh1Dmy5BmK3MpdSa5kqZcg6EKBdklU0bFXX9gCfzvpnyUehrPIuA==}
     dev: true
 
-  /@vegaprotocol/protos@0.14.0:
-    resolution: {integrity: sha512-GsGaOuR7ueAEurJiF55XD/TQ0OD5W1xLl4e5S3VFfCVgBEhlBIUtGbg+n4MjLI+RKOzbhIUCkcrOoOptnVpZBQ==}
+  /@vegaprotocol/protos@0.16.0:
+    resolution: {integrity: sha512-YeN6/CIm1NWygAuR7CXVZVSAk2/uvUEoHFbLXmZiRyMkTLaYME1sUJAeg5ZvGCoC8R5IKKmAZo+8kmALroRvNA==}
     dependencies:
       protobuf-codec: 2.0.5
       type-fest: 3.13.1
