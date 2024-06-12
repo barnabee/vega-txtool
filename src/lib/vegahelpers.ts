@@ -6,6 +6,7 @@ import jsonata from 'jsonata'
 import { diff, type Delta } from 'jsondiffpatch'
 import { vega } from '@vegaprotocol/protos'
 import { stringifyWithBigNumbers, removeEmpty } from "./jsonutils"
+import { type Settings } from './settings'
 
 export { type Delta } from 'jsondiffpatch'
 
@@ -96,38 +97,40 @@ export async function checkProtoShape(tx: any): Promise<ProtoCheckResult> {
 
 type OutputFormatter = {
   name: string,
-  format: (input: any, walletName: string, publicKey: string) => string
+  format: (input: any, settings: Settings) => string
 }
 
 /** Functions to format Vega command JSON for various uses e.g. *nix/Windows command line, etc. */
 export const outputFormatters: {[key: string]: OutputFormatter} = {
   json: {
     name: 'Raw JSON',
-    format(input: any, _walletName: string, _publicKey: string): string {
+    format(input: any, _: Settings): string {
       return stringifyWithBigNumbers(input, 0)
     }
   },
   json_pretty: {
     name: 'Pretty JSON',
-    format(input: any, _walletName: string, _publicKey: string): string {
+    format(input: any, _: Settings): string {
       return stringifyWithBigNumbers(input)
     }
   },
   unix_cmd: {
     name: 'Mac/Linux Command',
-    format(input: any, walletName: string, publicKey: string): string {
+    format(input: any, settings: Settings): string {
+      const { walletName, publicKey, networkName, additionalArgs } = settings.user
       const escapedJson = stringifyWithBigNumbers(input, 0)
-          ?.replaceAll(`'`, `'\\''`)
-      return `vega wallet transaction send --wallet '${walletName}' --pubkey '${publicKey}' --network mainnet1 '${escapedJson}'`
+        ?.replaceAll(`'`, `'\\''`)
+      return `vega wallet transaction send --wallet '${walletName}' --pubkey '${publicKey}' --network '${networkName}' ${additionalArgs} '${escapedJson}'`
     }
   },
   windows_cmd: {
     name: "Windows Command",
-    format(input: any, walletName: string, publicKey: string): string {
+    format(input: any, settings: Settings): string {
+      const { walletName, publicKey, networkName, additionalArgs } = settings.user
       const escapedJson = stringifyWithBigNumbers(input, 0)
-          ?.replaceAll('\\', '\\\\')
-          ?.replaceAll('"', '\\"')
-      return `vegawallet.exe transaction send --wallet "${walletName}" --pubkey "${publicKey}" --network mainnet1 "${escapedJson}"`
+        ?.replaceAll('\\', '\\\\')
+        ?.replaceAll('"', '\\"')
+      return `vegawallet.exe transaction send --wallet "${walletName}" --pubkey "${publicKey}" --network "${networkName}" ${additionalArgs} "${escapedJson}"`
     }
   },
 }

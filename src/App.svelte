@@ -1,6 +1,7 @@
 <script lang="ts">
   import { vega } from '@vegaprotocol/protos'
-   
+  import { type Settings } from './lib/settings'
+  import * as settingsStore from './lib/settings'
   import { stringifyWithBigNumbers, parseOr } from './lib/jsonutils'
   import { checkProtoShape, outputFormatters, type ProtoCheckResult, type Delta } from './lib/vegahelpers'
   import { 
@@ -14,8 +15,7 @@
   import ErrorReport from './ErrorReport.svelte'
   import TabBar from './TabBar.svelte'
   import Output from './Output.svelte'
-  import Settings from './Settings.svelte'
-  import { type SettingsData } from './Settings.svelte'
+  import SettingsView from './Settings.svelte'
   import ChangePreview from './ChangePreview.svelte'
   
   // UI state and settings
@@ -32,10 +32,7 @@
   let checkResult: ProtoCheckResult | null = null
   let left: any, right: any, delta: Delta | null, otherError: string | null
 
-  let settings: SettingsData = (localStorage.settings && JSON.parse(localStorage.settings)) || {
-    walletName: 'WALLET_NAME',
-    publicKey: 'PUBLIC_KEY'
-  }
+  let settings: Settings = settingsStore.load()
 
   // Called when URL hash changes
   onStateChanged(s => inputJson = s || '')
@@ -56,9 +53,8 @@
     saveCheckpointIfDirty()
   }
 
-  function saveSettings(newSettings: SettingsData) {
-    localStorage.setItem('settings', JSON.stringify(newSettings))
-    settings = newSettings
+  function saveSettings(newSettings: Settings) {
+    settings = settingsStore.save(newSettings)
   }
 
   $: setState(inputJson)  // update state has (with debounce) when editor changes
@@ -66,7 +62,7 @@
   $: tx = { nonce: 0n, blockHeight: 0n, command }  // place the parsed JSON in a Vega InputData message
   $: processInput(tx)
   $: outputText = left !== null 
-      ? outputFormatters[outputFormat].format(left, settings.walletName, settings.publicKey) : ''
+      ? outputFormatters[outputFormat].format(left, settings) : ''
 </script>
 
 <header>
@@ -130,7 +126,7 @@
   <p>✨ <a href="https://github.com/barnabee/vega-txtool">Source on GitHub</a> ✨</p>
 </footer>
 
-<Settings bind:settingsDialog bind:settings {saveSettings} />
+<SettingsView bind:settingsDialog bind:settings {saveSettings} />
 
 <style>
   #copy-button {

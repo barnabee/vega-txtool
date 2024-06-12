@@ -1,34 +1,32 @@
-<script lang="ts" context="module">
-  export type SettingsData = {
-    walletName: string
-    publicKey: string
-  }
-</script>
-
 <script lang="ts">
   import TabBar from "./TabBar.svelte"
+  import { type Settings } from './lib/settings'
 
   export let settingsDialog: HTMLDialogElement
   let settingsTab = 'user'
 
-  export let settings: SettingsData = { 
-    walletName: 'WALLET_NAME', 
-    publicKey: 'PUBLIC_KEY' 
-  }
+  export let settings: Settings;
+
   let walletName: string
   let publicKey: string
+  let networkName: string
+  let additionalArgs: string
   
   function resetSettings() { 
-    ({ walletName, publicKey } = settings)
+    ({ walletName, publicKey, networkName, additionalArgs } = settings.user)
   }
   resetSettings()
 
-  export let saveSettings: (settings: SettingsData) => void
+  export let saveSettings: (settings: Settings) => void
 
   function saveAndClose() {
     saveSettings({
-      walletName,
-      publicKey
+      user:{
+        walletName,
+        publicKey,
+        networkName,
+        additionalArgs
+      }
     })
     settingsDialog.close()
   }
@@ -50,6 +48,8 @@
         <h3>Variables for wallet command generation</h3>
         <p><label>Wallet name<input type="text" bind:value={walletName} /></label></p>
         <p><label>Public key<input type="text" bind:value={publicKey} /></label></p>
+        <p><label>Network name<input type="text" bind:value={networkName} /></label></p>
+        <p><label>Additional args<input type="text" bind:value={additionalArgs} /></label></p>
       {:else if settingsTab === 'ui'}
         <p>WIP</p>
       {/if}
